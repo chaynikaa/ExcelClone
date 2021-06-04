@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href = "https://fonts.googleapis.com/icon?family=Material+Icons" rel = "stylesheet">
     <link rel="stylesheet" href="style.css">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +13,74 @@
 </head>
 <body>
    <div class="container">
-       <div class="title"></div>
-       <div class="menu-bar"></div>
-       <div class="menu-icon-bar"></div>
-       <div class="formula-bar"></div>
-       <div class="data-container"></div>
+       <div class="title">Book1-Excel</div>
+       <div class="menu-bar">
+           <div class="menu-bar-item">File</div>
+           <div class="menu-bar-item selected">Home</div>
+           <div class="menu-bar-item">Insert</div>
+           <div class="menu-bar-item">Page Layout</div>
+           <div class="menu-bar-item">View</div>
+       </div>
+
+       <div class="menu-icon-bar">
+           <div class="material-icons menu-icon">content_cut</div>
+           <div class="material-icons menu-icon">content_copy</div>
+           <div class="material-icons menu-icon">content_paste</div>
+           <select class="menu-selector" id="font-family">
+            <option style="font-family:Arial, Helvetica, sans-serif;" value="Arial">Arial</option>
+            <option style="font-family: 'Courier New', Courier, monospace;" value="Courier New">Courier New</option>
+            <option style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" value="Franklin ">Franklin </option>
+            <option style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" value="Lucida Sans">Lucida Sans</option>
+            <option style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" value="Gill Sans">Gill Sans</option>
+            <option style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" value="Cambria">Cambria</option>    
+            <option style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" value="Segoe UI">Segoe UI</option>      
+            <option style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" value="Trebuchet MS">Trebuchet MS</option>      
+           </select>
+           <select class="menu-selector" id="font-size">
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+            <option value="20">20</option>
+            <option value="22">22</option>
+            <option value="24">24</option>
+            <option value="26">26</option>
+            <option value="30">30</option>
+        </select>
+        <div class="material-icons menu-icon">format_bold</div>
+        <div class="material-icons menu-icon">format_italic</div>
+        <div class="material-icons menu-icon">format_underlined</div>
+        <div class="material-icons menu-icon">format_color_fill</div>
+        <div class="material-icons menu-icon">format_color_text</div>
+        <div class="material-icons menu-icon">format_align_left</div>
+        <div class="material-icons menu-icon">format_align_center</div>
+        <div class="material-icons menu-icon">format_align_right</div> 
+       </div>
+
+       <div class="formula-bar">
+           <div id="selected-cell" contenteditable="true">A1</div>
+           <div id="formula-sign">fx</div>
+           <div id="formula-input"contenteditable="true"></div>
+
+       </div>
+       <div class="data-container">
+           <div id="select-all"></div>
+           <div id="columns">
+               
+         
+
+           </div>
+           <div id="rows">
+              
+           </div>
+
+           <div id="cells">
+
+           </div>
+       </div>
        <div class="sheet-bar"></div>
    </div> 
+   <script src="script.js"></script>
 </body>
 </html>
