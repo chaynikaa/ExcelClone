@@ -188,4 +188,32 @@ body{
     height: 25px;
     border-bottom: 1px solid lightgray;
     border-right: 1px solid lightgray;
+    overflow: hidden;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 1px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: left;
+    outline-color: #217346;
 }
+.input-cell.selected {
+    border: 2px solid #217346;
+}
+  .input-cell.top-selected{
+      border-top: none;
+  }
+  .input-cell.bottom-selected{
+    border-bottom: 1px solid lightgray;
+}
+
+.input-cell.left-selected{
+    border-left: none;
+}
+.input-cell.right-selected{
+    border-right: 1px solid lightgray;
+}
+
