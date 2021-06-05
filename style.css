@@ -136,7 +136,7 @@ body{
 }
 #columns{
     height: 25px;
-    width: calc(100vw - 25px);
+    width: calc(100vw - 30px);
     border: 1px solid green;
     display: flex;
     flex-direction: row;
@@ -145,22 +145,23 @@ body{
 }
 #rows{
     width: 25px;
-    height: calc(78vh - 15px);
+    height: calc(78vh - 25px);
     border: 1px solid red;
     overflow: hidden;
 
 }
 #cells{
+    position: relative;
     width: calc(100vw - 25px);
     height: calc(78vh - 15px);
     border: 1px solid  lightgray;
-    overflow: hidden;
+    overflow: scroll;
 
 }
 .column-name{
     min-width: 100px;
     height: 100%;
-    width: 100px;
+    width: 100px; 
     display: flex;
     justify-content: center;
     align-items: center;

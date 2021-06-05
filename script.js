@@ -1,9 +1,15 @@
+ 
+ 
+ const ps = new PerfectScrollbar("#cells",{
+     wheelSpeed: 15,
+     wheelPropagation: true
+ });
 
 for(let i=1;i<=100;i++){
 let str= "";
 let n=i;
  
-while(n>0){
+while(n>0){    
     let rem = n%26;
     if(rem==0){
         str="Z"+str;
@@ -29,3 +35,9 @@ while(n>0){
      }
      $("#cells").append(row);
  }
+ $("#cells").scroll(function(e){
+      $("#columns").scrollLeft(this.scrollLeft);
+      $("#rows").scrollTop(this.scrollTop);
+
+
+ })
