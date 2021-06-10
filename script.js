@@ -143,3 +143,42 @@ while(n>0){
      }
      $(ele).addClass("selected");
  }
+ let startCellSelected = false;
+ let startCell = {};
+ let endCell = {};
+
+ $(".input-cell").mousemove(function(e){
+     e.preventDefault();
+     if(e.buttons == 1){
+ 
+         if(!startCellSelected){
+             let [rowId,colId] = getRowCol(this);
+             startCell = { "rowId": rowId, "colId": colId};
+             selectAllBetweenCells(startCell,startCell);
+             startCellSelected = true;
+       } 
+    } else {
+        startCellSelected = false;
+    }
+ });
+ $(".input-cell").mouseenter(function(e){
+     console.log("hello");
+     if(e.buttons == 1){
+        let [rowId,colId] = getRowCol(this);
+        endCell = { "rowId": rowId, "colId": colId};
+        selectAllBetweenCells(startCell,endCell);
+     }
+     
+});
+ function selectAllBetweenCells(start,end){
+     console.log("hi");
+    $(".input-cell.selected").removeClass("selected top-selected bottom-selected left-selected right-selected");
+
+     for(let i = Math.min(start.rowId,end.rowId); i<= Math.max(start.rowId,end.rowId); i++){
+         for(let j = Math.min(start.colId,end.colId); j<= Math.max(start.colId,end.colId); j++){
+            let [topCell,bottomCell,leftCell,rightCell] = getTopLeftBottomRightCell(i,j);
+
+            selectCell($(`#row-${i}-col-${j}`)[0],{"ctrlKey": true}, topCell,bottomCell,leftCell,rightCell);
+         }
+     }
+ }
