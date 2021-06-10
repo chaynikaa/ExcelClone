@@ -146,11 +146,12 @@ while(n>0){
  let startCellSelected = false;
  let startCell = {};
  let endCell = {};
+ let scrollXRStarted = false;
+ let scrollXLStarted = false;
 
  $(".input-cell").mousemove(function(e){
      e.preventDefault();
-     if(e.buttons == 1){
- 
+        if(e.buttons == 1){
          if(!startCellSelected){
              let [rowId,colId] = getRowCol(this);
              startCell = { "rowId": rowId, "colId": colId};
@@ -162,8 +163,15 @@ while(n>0){
     }
  });
  $(".input-cell").mouseenter(function(e){
-     console.log("hello");
      if(e.buttons == 1){
+        if(e.pageX < ($(window).width() - 10) && scrollXRStarted){
+            clearInterval(scrollXRInterval);
+            scrollXRStarted = false;
+        }
+        if(e.pageX > 10 && scrollXLStarted){
+            clearInterval(scrollXLInterval);
+            scrollXLStarted = false;
+        }
         let [rowId,colId] = getRowCol(this);
         endCell = { "rowId": rowId, "colId": colId};
         selectAllBetweenCells(startCell,endCell);
@@ -171,7 +179,6 @@ while(n>0){
      
 });
  function selectAllBetweenCells(start,end){
-     console.log("hi");
     $(".input-cell.selected").removeClass("selected top-selected bottom-selected left-selected right-selected");
 
      for(let i = Math.min(start.rowId,end.rowId); i<= Math.max(start.rowId,end.rowId); i++){
@@ -182,3 +189,41 @@ while(n>0){
          }
      }
  }
+ let scrollXRInterval;
+ let scrollXLInterval;
+
+ 
+function scrollXR(){
+    scrollXRStarted = true;
+    scrollXRInterval = setInterval(()=>{
+        $("#cells").scrollLeft($("#cells").scrollLeft() + 100);
+    }, 100);
+   
+}
+function scrollXL(){
+    scrollXLStarted = true;
+    scrollXLInterval = setInterval(()=>{
+        $("#cells").scrollLeft($("#cells").scrollLeft() - 100);
+    }, 100);
+   
+}
+$(".data-container").mousemove(function(e){
+    e.preventDefault();
+    if(e.buttons == 1){
+        if(e.pageX > ($(window).width()-10)&& !scrollXRStarted){
+            scrollXR();
+        }else if (e.pageX <(10) && !scrollXLStarted){
+            scrollXL();
+        }
+    }
+});
+
+$(".data-container").mouseup(function(e){
+    clearInterval(scrollXRInterval);
+    clearInterval(scrollXLInterval);
+    scrollXLStarted = false;
+    scrollXRStarted = false;  
+
+});
+
+

@@ -132,12 +132,12 @@ body{
 #select-all{
     width: 25px;
     height: 25px;
-    border: 1px solid pink;
+    border: 1px solid lightgray;
 }
 #columns{
     height: 25px;
     width: calc(100vw - 30px);
-    border: 1px solid green;
+    border: 1px solid lightgray;
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -146,7 +146,7 @@ body{
 #rows{
     width: 25px;
     height: calc(78vh - 25px);
-    border: 1px solid red;
+    border: 1px solid lightgray;
     overflow: hidden;
 
 }
