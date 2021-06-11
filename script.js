@@ -163,6 +163,13 @@ while(n>0){
      let data = cellData[rowId-1][colId-1];
      $(".alignment.selected").removeClass("selected");
        $(`.alignment[data-type=${data.alignment}]`).addClass("selected");
+       if(data.bold){
+        $(`#bold`).addClass("selected");
+
+       } else{
+        $(`#bold`).removeClass("selected");
+
+       }
  }
  }
  let startCellSelected = false;
@@ -256,9 +263,27 @@ $(".alignment").click(function(e){
     $(".input-cell.selected").each(function(index,data){
        let [rowId,colId] = getRowCol(data);
        cellData[rowId-1][colId-1].alignment = alignment;   
-    })
+    });
     
-})
+});
 
+$("#bold").click(function(e){
+    if($(this).hasClass("selected")){
+        $(this).removeClass("selected");
+        $(".input-cell.selected").css("font-weight","");
+        $(".input-cell.selected").each(function(index,data){
+            let [rowId,colId] = getRowCol(data);
+            cellData[rowId-1][colId-1].bold = false;   
+         });
+    }
 
-
+    else{
+        $(this).addClass("selected");
+        $(".input-cell.selected").css("font-weight","bold");
+        $(".input-cell.selected").each(function(index,data){
+            let [rowId,colId] = getRowCol(data);
+            cellData[rowId-1][colId-1].bold = true ;   
+         });
+    }
+    
+});

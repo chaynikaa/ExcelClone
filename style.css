@@ -165,7 +165,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 600;
+    font-weight: bold;
     border-right: 1px solid lightgray;
 } 
 .row-name{
@@ -175,7 +175,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 600;
+    font-weight: bold;
 
 }
 .cell-row{
