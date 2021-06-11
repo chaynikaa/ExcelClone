@@ -195,7 +195,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     padding-top: 1px;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
     justify-content: left;
     outline-color: #217346;
@@ -216,4 +216,9 @@ body{
 .input-cell.right-selected{
     border-right: 1px solid lightgray;
 }
-
+.menu-icon.selected{
+    background-color: lightgray;
+}
+.input-cell:hover{
+    cursor: cell;
+}
