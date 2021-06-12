@@ -170,6 +170,21 @@ while(n>0){
         $(`#bold`).removeClass("selected");
 
        }
+       if(data.italic){
+        $(`#italic`).addClass("selected");
+
+       } else{
+        $(`#italic`).removeClass("selected");
+
+       }
+       if(data.underlined){
+        $(`#underlined`).addClass("selected");
+
+       } else{
+        $(`#underlined`).removeClass("selected");
+
+       }
+       
  }
  }
  let startCellSelected = false;
@@ -283,6 +298,48 @@ $("#bold").click(function(e){
         $(".input-cell.selected").each(function(index,data){
             let [rowId,colId] = getRowCol(data);
             cellData[rowId-1][colId-1].bold = true ;   
+         });
+    }
+    
+});
+
+$("#italic").click(function(e){
+    if($(this).hasClass("selected")){
+        $(this).removeClass("selected");
+        $(".input-cell.selected").css('font-style', 'normal');
+        $(".input-cell.selected").each(function(index,data){
+            let [rowId,colId] = getRowCol(data);
+            cellData[rowId-1][colId-1].italic = false;   
+         });
+    }
+
+    else{
+        $(this).addClass("selected");
+        $(".input-cell.selected").css('font-style', 'italic');
+        $(".input-cell.selected").each(function(index,data){
+            let [rowId,colId] = getRowCol(data);
+            cellData[rowId-1][colId-1].italic = true ;   
+         });
+    }
+    
+});
+
+$("#underlined").click(function(e){
+    if($(this).hasClass("selected")){
+        $(this).removeClass("selected");
+        $(".input-cell.selected").css('text-decoration', 'none');
+        $(".input-cell.selected").each(function(index,data){
+            let [rowId,colId] = getRowCol(data);
+            cellData[rowId-1][colId-1].underlined = false;   
+         });
+    }
+
+    else{
+        $(this).addClass("selected");
+        $(".input-cell.selected").css('text-decoration', 'underline');
+        $(".input-cell.selected").each(function(index,data){
+            let [rowId,colId] = getRowCol(data);
+            cellData[rowId-1][colId-1].underlined = true ;   
          });
     }
     
