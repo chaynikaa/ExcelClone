@@ -157,36 +157,29 @@ while(n>0){
      }
      $(ele).addClass("selected");
      changeHeader(getRowCol(ele));
-       
+    }     
 
  function changeHeader([rowId,colId]){
      let data = cellData[rowId-1][colId-1];
      $(".alignment.selected").removeClass("selected");
-       $(`.alignment[data-type=${data.alignment}]`).addClass("selected");
-       if(data.bold){
-        $(`#bold`).addClass("selected");
+     $(`.alignment[data-type=${data.alignment}]`).addClass("selected");
+     addRemoveSelectFromFontStyle(data,"bold");
+     addRemoveSelectFromFontStyle(data,"italic");
+     addRemoveSelectFromFontStyle(data,"underlined");
+     $("#fill-color").css("border-bottom",`4px solid ${data.bgcolor}`);
 
-       } else{
-        $(`#bold`).removeClass("selected");
+     $("#text-color").css("border-bottom",`4px solid ${data.color}`);
+   }
 
-       }
-       if(data.italic){
-        $(`#italic`).addClass("selected");
-
-       } else{
-        $(`#italic`).removeClass("selected");
-
-       }
-       if(data.underlined){
-        $(`#underlined`).addClass("selected");
-
-       } else{
-        $(`#underlined`).removeClass("selected");
+   function addRemoveSelectFromFontStyle(data,property){
+       if(data[property]){
+           $(`#${property}`).addClass("selected");
+       } else {
+        $(`#${property}`).removeClass("selected");
 
        }
-       
- }
- }
+   }
+ 
  let startCellSelected = false;
  let startCell = {};
  let endCell = {};
@@ -291,68 +284,7 @@ $("#underlined").click(function(e){
     setStyle(this,"underlined","text-decoration","underline");
 });
 
-// $("#bold").click(function(e){
-//     if($(this).hasClass("selected")){
-//         $(this).removeClass("selected");
-//         $(".input-cell.selected").css("font-weight","");
-//         $(".input-cell.selected").each(function(index,data){
-//             let [rowId,colId] = getRowCol(data);
-//             cellData[rowId-1][colId-1].bold = false;   
-//          });
-//     }
 
-//     else{
-//         $(this).addClass("selected");
-//         $(".input-cell.selected").css("font-weight","bold");
-//         $(".input-cell.selected").each(function(index,data){
-//             let [rowId,colId] = getRowCol(data);
-//             cellData[rowId-1][colId-1].bold = true ;   
-//          });
-//     }
-    
-// });
-
-// $("#italic").click(function(e){
-//     if($(this).hasClass("selected")){
-//         $(this).removeClass("selected");
-//         $(".input-cell.selected").css('font-style', 'normal');
-//         $(".input-cell.selected").each(function(index,data){
-//             let [rowId,colId] = getRowCol(data);
-//             cellData[rowId-1][colId-1].italic = false;   
-//          });
-//     }
-
-//     else{
-//         $(this).addClass("selected");
-//         $(".input-cell.selected").css('font-style', 'italic');
-//         $(".input-cell.selected").each(function(index,data){
-//             let [rowId,colId] = getRowCol(data);
-//             cellData[rowId-1][colId-1].italic = true ;   
-//          });
-//     }
-    
-// });
-
-// $("#underlined").click(function(e){
-//     if($(this).hasClass("selected")){
-//         $(this).removeClass("selected");
-//         $(".input-cell.selected").css('text-decoration', 'none');
-//         $(".input-cell.selected").each(function(index,data){
-//             let [rowId,colId] = getRowCol(data);
-//             cellData[rowId-1][colId-1].underlined = false;   
-//          });
-//     }
-
-//     else{
-//         $(this).addClass("selected");
-//         $(".input-cell.selected").css('text-decoration', 'underline');
-//         $(".input-cell.selected").each(function(index,data){
-//             let [rowId,colId] = getRowCol(data);
-//             cellData[rowId-1][colId-1].underlined = true ;   
-//          });
-//     }
-    
-// });
 function setStyle(ele,property,key,value){
     if($(ele).hasClass("selected")){
         $(ele).removeClass("selected");
@@ -370,7 +302,47 @@ function setStyle(ele,property,key,value){
             let [rowId,colId] = getRowCol(data);
             cellData[rowId-1][colId-1][property] = true ;   
          });
-    }
-    
+    }  
     
 }
+
+$(".pick-color").colorPick({
+    'initialColor' : "#abcd",
+    'allowRecent': true,
+    'recentMax': 5,
+    'allowCustomColor': true,
+    'palette': ["#1abc9c", "#16a085", "#2ecc71", "#27ae60", "#3498db", "#2980b9", "#9b59b6", "#8e44ad", "#34495e", "#2c3e50", "#f1c40f", "#f39c12", "#e67e22", "#d35400", "#e74c3c", "#c0392b", "#ecf0f1", "#bdc3c7", "#95a5a6", "#7f8c8d"],
+    'onColorSelected': function() {
+        if(this.color != "#ABCD"){
+            if($(this.element.children()[1]).attr("id") == "fill-color"){
+                $(".input-cell.selected").css({"background-color": this.color});
+                $("#fill-color").css("border-bottom", `4px solid ${this.color}`);
+                $(".input-cell.selected").each((index,data) => {
+                    let [rowId,colId] = getRowCol(data);
+                    cellData[rowId - 1][colId - 1].bgcolor = this.color;
+                });
+            }
+            if($(this.element.children()[1]).attr("id") == "text-color"){
+                $(".input-cell.selected").css({"color": this.color});
+                $("#text-color").css("border-bottom", `4px solid ${this.color}`);
+                $(".input-cell.selected").each((index,data) => {
+                    let [rowId,colId] = getRowCol(data);
+                    cellData[rowId - 1][colId - 1].color = this.color;
+                })
+
+            }
+         }
+    //   this.element.css({'backgroundColor': this.color, 'color': this.color});
+    }
+  });
+  
+  $("#fill-color").click(function(e){
+      setTimeout(() =>{
+        $(this).parent().click();
+      },50);
+  });
+  $("#text-color").click(function(e){
+    setTimeout(() =>{
+      $(this).parent().click();
+    },50);
+});
